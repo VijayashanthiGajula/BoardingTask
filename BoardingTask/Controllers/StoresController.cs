@@ -95,7 +95,7 @@ namespace BoardingTask.Controllers
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
-            return new JsonResult { Data = Store, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = value, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
         public JsonResult Edit(Customer c)

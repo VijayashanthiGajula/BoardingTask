@@ -56,7 +56,7 @@ export default class StoreCreate extends Component {
                     >New Store</button>}
 
                     open={this.state.showCreateModal}
-                    size="small">
+                    size="mini">
 
 
                     <Modal.Header> Create Store </Modal.Header>

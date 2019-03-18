@@ -100,8 +100,6 @@ export default class ProductTable extends Component
             type: "GET",
             data: { 'id': id },
             success: function (data) {
-                 
-
                 var obj = JSON.parse(data);
                 this.setState({ ProductId: obj.Id, ProductName: obj.Name, ProductPrice: obj.Price })
                 
@@ -120,7 +118,12 @@ export default class ProductTable extends Component
     onUpdateSubmit() {
 
         
-        let data = { Id: this.state.ProductId, Name: this.state.ProductName, Price: this.state.ProductPrice };
+        let data = {
+            'Id': this.state.ProductId,
+            'Name': this.state.ProductName,
+            'Price': this.state.ProductPrice
+        };
+        console.log(data);
 
         $.ajax({
             url: "/Product/Edit",
@@ -191,7 +194,7 @@ export default class ProductTable extends Component
                         showDeleteModal={this.state.showDeleteModal}
                         Id={this.state.ProductId}
                         Name={this.state.ProductName}
-                        Address={this.state.ProductPrice} />
+                        Price={this.state.ProductPrice} />
 
                     <ProductUpdate
                         onChange={this.onChange}
@@ -201,7 +204,7 @@ export default class ProductTable extends Component
                         showUpdateModel={this.state.showUpdateModel}
                         Id={this.state.ProductId}
                         Name={this.state.ProductName}
-                        Address={this.state.ProductPrice} />
+                        Price={this.state.ProductPrice} />
 
 
 

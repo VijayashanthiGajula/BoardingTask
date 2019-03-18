@@ -110,7 +110,12 @@ export default class CustomerTable extends Component {
         onUpdateSubmit() {
 
 
-            let data = { Id: this.state.CustomerId, Name: this.state.CustomerName, Address: this.state.CustomerAddress };
+            let data = {
+                Id: this.state.CustomerId,
+                Name: this.state.CustomerName,
+                Address: this.state.CustomerAddress
+            };
+            console.log(data);
 
             $.ajax({
                 url: "/Customer/Edit",

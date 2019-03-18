@@ -25,7 +25,7 @@ export default class ProductUpdate extends Component {
         
         return (
             <React.Fragment>
-                console.log(this.props.ProductPrice,this.props.ProductName);
+                
                 <Modal open={this.props.showUpdateModel}
                     onClose={this.props.onClose} size='mini'>
 
@@ -36,15 +36,17 @@ export default class ProductUpdate extends Component {
                                 <label>Name</label>
                                 <input type="text"
                                     name="ProductName"
-                                    placeholder={this.props.ProductName}
-                                    defaultValue={this.props.Name} onChange={this.props.onChange} />
+                                    
+                                    defaultValue={this.props.Name}
+                                    onChange={this.props.onChange} />
                             </Form.Field>
                             <Form.Field>
                                 <label>Price</label>
                                 <input type="text"
-                                    name="Price"
-                                    placeholder={this.props.ProductPrice}
-                                    defaultValue={this.props.ProductPrice} onChange={this.props.onChange} />
+                                    name="ProductPrice"
+                                   
+                                    defaultValue={this.props.Price}
+                                    onChange={this.props.onChange} />
                             </Form.Field>
 
                         </form>

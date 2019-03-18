@@ -90,7 +90,7 @@ export default class StoreTable extends Component {
                 type: "GET",
                 data: { 'id': id },
                 success: function (data) {
-                    console.log("record updated");
+                    
                     //this.setState({ StoreId: data.Id, StoreName: data.Name, StoreAddress: data.Address })
                     var obj = JSON.parse(data);
                     this.setState({ StoreId: obj.Id, StoreName: obj.Name, StoreAddress: obj.Address })
@@ -111,7 +111,7 @@ export default class StoreTable extends Component {
 
 
             let data = { Id: this.state.StoreId, Name: this.state.StoreName, Address: this.state.StoreAddress };
-
+            console.log(data);
             $.ajax({
                 url: "/Stores/Edit",
                 type: "POST",

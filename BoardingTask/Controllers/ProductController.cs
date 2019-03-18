@@ -117,7 +117,7 @@ namespace BoardingTask.Controllers
 
 
             var Product = db.Products.Where(x => x.Id == c.Id).SingleOrDefault();
-            //Product.Id = c.Id;
+            Product.Id = c.Id;
             Product.Name = c.Name;
             Product.Price = c.Price;
             db.SaveChanges();

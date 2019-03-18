@@ -32,14 +32,13 @@ export default class StoreUpdate extends Component {
                             <Form.Field>
                                 <label>Name</label>
                                 <input type="text" name="StoreName"
-                                    placeholder={this.props.Name}
+                                    
                                     defaultValue={this.props.Name} onChange={this.props.onChange} />
                             </Form.Field>
                             <Form.Field>
                                 <label>Address</label>
                                 <input type="text"
                                     name="StoreAddress"
-                                    placeholder={this.props.Address}
                                     defaultValue={this.props.Address}
                                     onChange={this.props.onChange} />
 

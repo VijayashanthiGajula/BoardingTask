@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnBoardingDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="DateSold" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Sales_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Store1">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnBoardingDBModel1StoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Sales_Customers" Association="Self.FK_Sales_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Product" Association="Self.FK_Sales_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Store1" Association="Self.FK_Sales_Store1">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnBoardingDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Customers" FromRole="Customers" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Product" FromRole="Product" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="StoreId" Type="Int32" Nullable="false" />
+          <Property Name="DateSold" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Sales_Customers" FromRole="Sales" ToRole="Customers" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Sales_Product" FromRole="Sales" ToRole="Product" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Sales_Store1" FromRole="Sales" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Store1" FromRole="Store" ToRole="Sales" />
+        </EntityType>
+        <Association Name="FK_Sales_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Store1">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnBoardingDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <AssociationSet Name="FK_Sales_Customers" Association="Self.FK_Sales_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Product" Association="Self.FK_Sales_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Store1" Association="Self.FK_Sales_Store1">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnBoardingDBModel1StoreContainer" CdmEntityContainer="OnBoardingDBEntities1">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OnBoardingDBModel1.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="OnBoardingDBModel1.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="OnBoardingDBModel1.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="DateSold" ColumnName="DateSold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="OnBoardingDBModel1.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

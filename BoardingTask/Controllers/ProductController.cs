@@ -21,7 +21,7 @@ namespace BoardingTask.Controllers
         public JsonResult GetProductList()
         {
 
-            var data = db.Products.Select(x => new ProductModel
+            var data = db.Products.Select(x => new  
             {
                 Id = x.Id,
                 Name = x.Name,

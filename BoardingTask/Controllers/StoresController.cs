@@ -19,7 +19,7 @@ namespace BoardingTask.Controllers
         //Get StoresList
         public JsonResult GetStoresList()
         {
-            var data = db.Stores.Select(x => new StoreModel
+            var data = db.Stores.Select(x => new  
             {
                 Id = x.Id,
                 Name = x.Name,

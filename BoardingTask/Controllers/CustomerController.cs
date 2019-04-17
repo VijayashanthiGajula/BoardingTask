@@ -25,11 +25,12 @@ namespace BoardingTask.Controllers
         {
             
               //creating object of customer model to hold the values globally
-                var data = db.Customers.Select(x => new CustomerModel
+                var data = db.Customers.Select(x => new  
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address
+                    
                 }).ToList();
            
             

@@ -39,7 +39,7 @@ export default class CustomerTable extends Component {
         loadData() {
 
             $.ajax({
-                url: "/Customer/GetCustomerList",
+                url: "/Customer/Index",
                 type: "GET",
                 success: function (data) { this.setState({ CustomerList: data }) }.bind(this)
             });
